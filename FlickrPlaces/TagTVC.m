@@ -11,8 +11,8 @@
 
 @interface TagTVC ()
 
-@property (strong, nonatomic) NSArray *photos;
-@property (strong, nonatomic) NSDictionary *photosByTag;
+@property (strong, nonatomic) NSArray *photos;  //of photo
+@property (strong, nonatomic) NSDictionary *photosByTag; //of dictionary of array
 
 @end
 
