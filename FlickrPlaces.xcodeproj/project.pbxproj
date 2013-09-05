@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		582E322F17D9073F0038055B /* FlickrPhotoTagsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 582E322E17D9073F0038055B /* FlickrPhotoTagsTVC.m */; };
+		582E323217D90F8B0038055B /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 582E323117D90F8B0038055B /* ImageViewController.m */; };
+		582E326D17D91A9C0038055B /* ExtendNSLogFunctionality.m in Sources */ = {isa = PBXBuildFile; fileRef = 582E326C17D91A9C0038055B /* ExtendNSLogFunctionality.m */; };
 		58D3839617D3C40500AA25B8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58D3839517D3C40500AA25B8 /* UIKit.framework */; };
 		58D3839817D3C40500AA25B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58D3839717D3C40500AA25B8 /* Foundation.framework */; };
 		58D3839A17D3C40500AA25B8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58D3839917D3C40500AA25B8 /* CoreGraphics.framework */; };
@@ -24,6 +27,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		582E322D17D9073F0038055B /* FlickrPhotoTagsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrPhotoTagsTVC.h; sourceTree = "<group>"; };
+		582E322E17D9073F0038055B /* FlickrPhotoTagsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrPhotoTagsTVC.m; sourceTree = "<group>"; };
+		582E323017D90F8B0038055B /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
+		582E323117D90F8B0038055B /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
+		582E326B17D91A9C0038055B /* ExtendNSLogFunctionality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendNSLogFunctionality.h; sourceTree = "<group>"; };
+		582E326C17D91A9C0038055B /* ExtendNSLogFunctionality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendNSLogFunctionality.m; sourceTree = "<group>"; };
 		58D3839217D3C40500AA25B8 /* FlickrPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D3839517D3C40500AA25B8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		58D3839717D3C40500AA25B8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -97,6 +106,10 @@
 				58D383B017D3C40500AA25B8 /* MainStoryboard_iPad.storyboard */,
 				58D383D717D6697400AA25B8 /* TagTVC.h */,
 				58D383D817D6697400AA25B8 /* TagTVC.m */,
+				582E322D17D9073F0038055B /* FlickrPhotoTagsTVC.h */,
+				582E322E17D9073F0038055B /* FlickrPhotoTagsTVC.m */,
+				582E323017D90F8B0038055B /* ImageViewController.h */,
+				582E323117D90F8B0038055B /* ImageViewController.m */,
 				58D383B317D3C40500AA25B8 /* FlickrViewController.h */,
 				58D383B417D3C40500AA25B8 /* FlickrViewController.m */,
 				58D3839C17D3C40500AA25B8 /* Supporting Files */,
@@ -107,6 +120,8 @@
 		58D3839C17D3C40500AA25B8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				582E326B17D91A9C0038055B /* ExtendNSLogFunctionality.h */,
+				582E326C17D91A9C0038055B /* ExtendNSLogFunctionality.m */,
 				58D383A417D3C40500AA25B8 /* FlickrAppDelegate.h */,
 				58D383A517D3C40500AA25B8 /* FlickrAppDelegate.m */,
 				58D3839D17D3C40500AA25B8 /* FlickrPlaces-Info.plist */,
@@ -203,6 +218,9 @@
 				58D383B517D3C40500AA25B8 /* FlickrViewController.m in Sources */,
 				58D383C417D3C73B00AA25B8 /* FlickrFetcher.m in Sources */,
 				58D383D917D6697400AA25B8 /* TagTVC.m in Sources */,
+				582E322F17D9073F0038055B /* FlickrPhotoTagsTVC.m in Sources */,
+				582E323217D90F8B0038055B /* ImageViewController.m in Sources */,
+				582E326D17D91A9C0038055B /* ExtendNSLogFunctionality.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +353,7 @@
 				58D383BA17D3C40500AA25B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

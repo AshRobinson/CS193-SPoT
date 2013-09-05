@@ -18,7 +18,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"%@", [FlickrFetcher stanfordPhotos]);
 }
 
 @end

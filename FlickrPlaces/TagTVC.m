@@ -18,20 +18,14 @@
 
 @implementation TagTVC
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.photos = [FlickrFetcher stanfordPhotos];
 }
+
 
 - (void)setPhotos:(NSArray *)photos
 {
@@ -59,6 +53,30 @@
     }
     self.photosByTag = photosByTag;
 }
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([sender isKindOfClass:[UITableViewCell class]]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        if (indexPath) {
+            if ([segue.identifier isEqualToString:@"Show Photos"]) {
+                if ([segue.destinationViewController respondsToSelector:@selector(setPhotos:)]) {
+                    NSString *tag = [self tagForRow:indexPath.row];
+                    [segue.destinationViewController performSelector:@selector(setPhotos:)
+                                                          withObject:self.photosByTag[tag]];
+                    [segue.destinationViewController setTitle:[tag capitalizedString]];
+                }
+            }
+        }
+    }
+}
+
+- (NSString *)tagForRow:(NSUInteger)row
+{
+    return [self.photosByTag allKeys][row];
+}
+
 
 #pragma mark - Table view data source
 
