@@ -52,7 +52,7 @@
 
 - (NSString *)subtitleForRow:(NSUInteger)row
 {
-    return [self.photos[row][FLICKR_PHOTO_OWNER] description];
+    return [[self.photos[row] valueForKeyPath:FLICKR_PHOTO_DESCRIPTION] description];
 }
 
 #pragma mark - Table view data source
