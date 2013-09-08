@@ -8,6 +8,7 @@
 
 #import "FlickrPhotoTagsTVC.h"
 #import "FlickrFetcher.h"
+#import "RecentFlickrPhotos.h"
 
 @interface FlickrPhotoTagsTVC ()
 
@@ -15,16 +16,10 @@
 
 @implementation FlickrPhotoTagsTVC
 
--(void)setPhotos:(NSArray *)photos
+- (void)setPhotos:(NSArray *)photos
 {
     _photos = photos;
     [self.tableView reloadData];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -33,26 +28,21 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         if (indexPath) {
             if ([segue.identifier isEqualToString:@"Show Image"]) {
-                if ([segue.destinationViewController respondsToSelector:@selector(setImageURL:)]) {
-                    NSURL *url = [FlickrFetcher urlForPhoto:self.photos[indexPath.row] format:FlickrPhotoFormatLarge];
-                    [segue.destinationViewController performSelector:@selector(setImageURL:) withObject:url];
-                    [segue.destinationViewController setTitle:[self titleForRow:indexPath.row]];
-                }
+                [self sendDataforIndexPath:indexPath
+                          toViewController:segue.destinationViewController];
             }
         }
     }
 }
 
-
-- (NSString *)titleForRow:(NSUInteger)row
+- (void)sendDataforIndexPath:(NSIndexPath *)indexPath toViewController:(UIViewController *)vc
 {
-    return [self.photos[row][FLICKR_PHOTO_TITLE] description];
-    
-}
-
-- (NSString *)subtitleForRow:(NSUInteger)row
-{
-    return [[self.photos[row] valueForKeyPath:FLICKR_PHOTO_DESCRIPTION] description];
+    if ([vc respondsToSelector:@selector(setImageURL:)]) {
+        [RecentFlickrPhotos addPhoto:self.photos[indexPath.row]];
+        NSURL *url = [FlickrFetcher urlForPhoto:self.photos[indexPath.row] format:FlickrPhotoFormatLarge];
+        [vc performSelector:@selector(setImageURL:) withObject:url];
+        [vc setTitle:[self titleForRow:indexPath.row]];
+    }
 }
 
 #pragma mark - Table view data source
@@ -60,6 +50,16 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [self.photos count];
+}
+
+- (NSString *)titleForRow:(NSUInteger)row
+{
+    return [self.photos[row][FLICKR_PHOTO_TITLE] description];
+}
+
+- (NSString *)subtitleForRow:(NSUInteger)row
+{
+    return [[self.photos[row] valueForKeyPath:FLICKR_PHOTO_DESCRIPTION] description];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -71,6 +71,12 @@
     cell.detailTextLabel.text = [self subtitleForRow:indexPath.row];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self sendDataforIndexPath:indexPath
+              toViewController:[self.splitViewController.viewControllers lastObject]];
 }
 
 

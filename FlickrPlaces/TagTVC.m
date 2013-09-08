@@ -19,32 +19,16 @@
 @implementation TagTVC
 
 
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.photos = [FlickrFetcher stanfordPhotos];
-}
-
-
-- (void)setPhotos:(NSArray *)photos
-{
-    _photos = photos;
-    [self updatePhotosByTag];
-    [self.tableView reloadData];
-}
-
-
 - (void)updatePhotosByTag
 {
     NSMutableDictionary *photosByTag = [NSMutableDictionary dictionary];
-    for (NSDictionary *photo in self.photos){
-        for (NSString *tag in [photo[FLICKR_TAGS] componentsSeparatedByString:@" "]){
+    for (NSDictionary *photo in self.photos) {
+        for (NSString *tag in [photo[FLICKR_TAGS] componentsSeparatedByString:@" "]) {
             if ([tag isEqualToString:@"cs193pspot"]) continue;
             if ([tag isEqualToString:@"portrait"]) continue;
             if ([tag isEqualToString:@"landscape"]) continue;
-            NSMutableArray *photos = [photosByTag objectForKey:tag];
-            if (!photos){
+            NSMutableArray *photos = photosByTag[tag];
+            if (!photos) {
                 photos = [NSMutableArray array];
                 photosByTag[tag] = photos;
             }
@@ -54,6 +38,20 @@
     self.photosByTag = photosByTag;
 }
 
+- (void)setPhotos:(NSArray *)photos
+{
+    _photos = [photos sortedArrayUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:FLICKR_PHOTO_TITLE ascending:YES]]];
+    [self updatePhotosByTag];
+    [self.tableView reloadData];
+}
+
+#pragma mark - Life cycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.photos = [FlickrFetcher stanfordPhotos];
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -72,12 +70,6 @@
     }
 }
 
-- (NSString *)tagForRow:(NSUInteger)row
-{
-    return [self.photosByTag allKeys][row];
-}
-
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -90,15 +82,21 @@
     return [self.photosByTag count];
 }
 
+- (NSString *)tagForRow:(NSUInteger)row
+{
+    return [[self.photosByTag allKeys] sortedArrayUsingSelector:@selector(compare:)][row];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Tag Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    NSString *tag = [[self.photosByTag allKeys] objectAtIndex:indexPath.row];
+    NSString *tag = [self tagForRow:indexPath.row];
     int photoCount = [self.photosByTag[tag] count];
     cell.textLabel.text = [tag capitalizedString];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d Photo%@", photoCount, photoCount > 1 ? @"s": @""];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d photo%@", photoCount, photoCount > 1 ? @"s" : @""];
+    
     return cell;
 }
 

@@ -42,7 +42,7 @@
             </objects>
             <point key="canvasLocation" x="-80" y="-636"/>
         </scene>
-        <!--TagTVC-->
+        <!--TagTVC - Flickr Tags-->
         <scene sceneID="6TT-ic-fnY">
             <objects>
                 <tableViewController id="sUn-5l-kR2" customClass="TagTVC" sceneMemberID="viewController">
@@ -81,7 +81,7 @@
                             <outlet property="delegate" destination="sUn-5l-kR2" id="uAf-mF-XLK"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="1xv-Xi-SWf"/>
+                    <navigationItem key="navigationItem" title="Flickr Tags" id="1xv-Xi-SWf"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TXK-5m-bBg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -117,7 +117,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="Irc-vo-kyz" kind="push" identifier="Show Image" id="iPb-ns-1qZ"/>
+                                    <segue destination="Irc-vo-kyz" kind="push" identifier="Show Image" id="lfT-lK-BRg"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -157,7 +157,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="huk-sJ-oir" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1071" y="-636"/>
+            <point key="canvasLocation" x="1098" y="-230"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="l9r-7F-JRZ">
@@ -171,52 +171,59 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="bRf-ho-08N" kind="relationship" relationship="rootViewController" id="YNW-Df-wwE"/>
+                        <segue destination="ShH-WP-Plo" kind="relationship" relationship="rootViewController" id="eha-Kj-yYc"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BOt-9y-MXZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-80" y="-38"/>
         </scene>
-        <!--Table View Controller - Recents-->
-        <scene sceneID="6EQ-eF-UVy">
+        <!--Flickr RecentsTVC - Recents-->
+        <scene sceneID="yxx-Ve-8JV">
             <objects>
-                <tableViewController id="bRf-ho-08N" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="3Pd-Yq-Yzz">
+                <tableViewController id="ShH-WP-Plo" customClass="FlickrRecentsTVC" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ISy-R8-osS">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Recents Cell" textLabel="WzX-sG-CBH" detailTextLabel="2MT-wh-N47" style="IBUITableViewCellStyleSubtitle" id="NP3-UB-ydx">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Tags Cell" textLabel="9Y9-H5-mTJ" detailTextLabel="6lF-jz-sRl" style="IBUITableViewCellStyleSubtitle" id="BcA-ch-0lc">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WzX-sG-CBH">
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9Y9-H5-mTJ">
+                                            <rect key="frame" x="10" y="2" width="38" height="22"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2MT-wh-N47">
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6lF-jz-sRl">
+                                            <rect key="frame" x="10" y="24" width="47" height="18"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <segue destination="Irc-vo-kyz" kind="push" identifier="Show Image" id="pRC-rM-eGj"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="bRf-ho-08N" id="dfb-eK-jwO"/>
-                            <outlet property="delegate" destination="bRf-ho-08N" id="yWn-3G-ZjE"/>
+                            <outlet property="dataSource" destination="ShH-WP-Plo" id="YsK-X6-ooK"/>
+                            <outlet property="delegate" destination="ShH-WP-Plo" id="jsW-D7-WFm"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Recents" id="zNk-Qo-Ce7"/>
+                    <navigationItem key="navigationItem" title="Recents" id="XJq-X7-4XM"/>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Xab-M5-cKa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pEJ-6e-lcD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="293" y="-38"/>
         </scene>
@@ -224,6 +231,9 @@
     <classes>
         <class className="FlickrPhotoTagsTVC" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FlickrPhotoTagsTVC.h"/>
+        </class>
+        <class className="FlickrRecentsTVC" superclassName="FlickrPhotoTagsTVC">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FlickrRecentsTVC.h"/>
         </class>
         <class className="ImageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ImageViewController.h"/>
@@ -243,4 +253,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="lfT-lK-BRg"/>
+    </inferredMetricsTieBreakers>
 </document>
