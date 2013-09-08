@@ -10,4 +10,7 @@
 
 @interface RecentFlickrPhotos : NSObject
 
++ (NSArray *)allPhotos;
++ (void) addPhoto: (NSDictionary *)photo;
+
 @end
