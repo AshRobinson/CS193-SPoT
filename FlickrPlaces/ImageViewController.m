@@ -7,6 +7,8 @@
 //
 
 #import "ImageViewController.h"
+#import "NetworkActivityIndicator.h"
+#import "FlickrCache.h"
 
 @interface ImageViewController () <UIScrollViewDelegate, UISplitViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -14,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *barButtonTitle;
 @property (nonatomic, strong) UIBarButtonItem *splitViewBarButtonItem;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+
 @end
 
 @implementation ImageViewController
@@ -78,14 +82,36 @@
         self.scrollView.contentSize = CGSizeZero;
         self.imageView.image = nil;
         
-        NSData *imageData = [[NSData alloc] initWithContentsOfURL:self.imageURL];
-        UIImage *image = [[UIImage alloc] initWithData:imageData];
-        if (image) {
-            [self setZoomScaleToFillScreen];
-            self.scrollView.contentSize = image.size;
-            self.imageView.image = image;
-            self.imageView.frame = CGRectMake(0, 0, image.size.width, image.size.height);
-        }
+        
+        if (!self.imageURL) return;
+        [self.spinner startAnimating];
+        NSURL *imageURL = self.imageURL;
+        dispatch_queue_t queue = dispatch_queue_create("Get Photo", NULL);
+        dispatch_async(queue, ^{
+            NSData *imageData;
+            NSURL *cachedURL = [FlickrCache cachedURLforURL:imageURL];
+            if (cachedURL){
+                imageData = [[NSData alloc] initWithContentsOfURL:cachedURL];
+            } else {
+                [NetworkActivityIndicator start];
+                imageData = [[NSData alloc] initWithContentsOfURL:self.imageURL];
+                [NetworkActivityIndicator stop];
+            }
+            [FlickrCache cacheImageData:imageData forURL:self.imageURL];
+
+            if (self.imageURL == imageURL) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIImage *image = [[UIImage alloc] initWithData:imageData];
+                    if (image) {
+                        [self setZoomScaleToFillScreen];
+                        self.scrollView.contentSize = image.size;
+                        self.imageView.image = image;
+                        self.imageView.frame = CGRectMake(0, 0, image.size.width, image.size.height);
+                    }
+                    [self.spinner stopAnimating];
+                });
+            }
+        });
     }
 }
 
@@ -111,7 +137,19 @@
     self.scrollView.delegate = self;
     self.barButtonTitle.title = self.title;
     [self handleSplitViewBarButtonItem:self.splitViewBarButtonItem];
+    //[self resetImage];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     [self resetImage];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.imageView.image = nil;
 }
 
 - (void)viewDidLayoutSubviews
@@ -127,6 +165,5 @@
     if (wScale > hScale) self.scrollView.zoomScale = wScale;
     else self.scrollView.zoomScale = hScale;
 }
-
 
 @end

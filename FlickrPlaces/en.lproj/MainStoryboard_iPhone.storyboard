@@ -82,6 +82,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Flickr Tags" id="1xv-Xi-SWf"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="DZ8-3Q-1jB">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TXK-5m-bBg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -140,11 +143,16 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dom-Xb-kXb"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dom-Xb-kXb">
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </scrollView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="sEk-If-gCC"/>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="sEk-If-gCC" firstAttribute="centerY" secondItem="dom-Xb-kXb" secondAttribute="centerY" type="default" id="Lbk-LI-XEj"/>
                             <constraint firstItem="dom-Xb-kXb" firstAttribute="top" secondItem="hFx-CV-fHe" secondAttribute="top" type="default" id="UXg-l6-k4p"/>
+                            <constraint firstItem="sEk-If-gCC" firstAttribute="leading" secondItem="hFx-CV-fHe" secondAttribute="leading" constant="141" id="bIe-dt-wwI"/>
                             <constraint firstItem="dom-Xb-kXb" firstAttribute="leading" secondItem="hFx-CV-fHe" secondAttribute="leading" type="default" id="inB-vZ-jQ9"/>
                             <constraint firstItem="dom-Xb-kXb" firstAttribute="trailing" secondItem="hFx-CV-fHe" secondAttribute="trailing" type="default" id="m7H-u1-3db"/>
                             <constraint firstItem="dom-Xb-kXb" firstAttribute="bottom" secondItem="hFx-CV-fHe" secondAttribute="bottom" type="default" id="o1v-SR-KhS"/>
@@ -153,6 +161,7 @@
                     <navigationItem key="navigationItem" id="Beb-lj-RS7"/>
                     <connections>
                         <outlet property="scrollView" destination="dom-Xb-kXb" id="BYL-Qx-fpw"/>
+                        <outlet property="spinner" destination="sEk-If-gCC" id="T9F-Ut-T5I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="huk-sJ-oir" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -228,26 +237,6 @@
             <point key="canvasLocation" x="293" y="-38"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="FlickrPhotoTagsTVC" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FlickrPhotoTagsTVC.h"/>
-        </class>
-        <class className="FlickrRecentsTVC" superclassName="FlickrPhotoTagsTVC">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FlickrRecentsTVC.h"/>
-        </class>
-        <class className="ImageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ImageViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="TagTVC" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TagTVC.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -8,11 +8,13 @@
 
 #import "TagTVC.h"
 #import "FlickrFetcher.h"
+#import "NetworkActivityIndicator.h"
 
 @interface TagTVC ()
 
 @property (strong, nonatomic) NSArray *photos;  //of photo
 @property (strong, nonatomic) NSDictionary *photosByTag; //of dictionary of array
+@property (strong, nonatomic) NSArray *tags;
 
 @end
 
@@ -36,11 +38,17 @@
         }
     }
     self.photosByTag = photosByTag;
+    self.tags = [[photosByTag allKeys] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [obj1 compare:obj2 options:NSCaseInsensitiveSearch];
+    }];
 }
 
 - (void)setPhotos:(NSArray *)photos
 {
-    _photos = [photos sortedArrayUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:FLICKR_PHOTO_TITLE ascending:YES]]];
+    _photos = [photos sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [obj1[FLICKR_PHOTO_TITLE] compare:obj2[FLICKR_PHOTO_TITLE] options:NSCaseInsensitiveSearch];
+    }];
+    
     [self updatePhotosByTag];
     [self.tableView reloadData];
 }
@@ -50,7 +58,27 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.photos = [FlickrFetcher stanfordPhotos];
+    [self.refreshControl addTarget:self
+                            action:@selector(loadPhotos)
+                  forControlEvents:UIControlEventValueChanged];
+    [self loadPhotos];
+}
+
+- (IBAction)loadPhotos
+{
+    [self.refreshControl beginRefreshing];
+    dispatch_queue_t queue = dispatch_queue_create("load photos", NULL);
+    dispatch_async(queue, ^{
+        [NetworkActivityIndicator start];
+        NSArray *photos = [FlickrFetcher stanfordPhotos];
+        [NetworkActivityIndicator stop];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.photos = photos;
+            [self.tableView reloadData];
+            [self.refreshControl endRefreshing];
+        });
+    });
+    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -60,7 +88,7 @@
         if (indexPath) {
             if ([segue.identifier isEqualToString:@"Show Photos"]) {
                 if ([segue.destinationViewController respondsToSelector:@selector(setPhotos:)]) {
-                    NSString *tag = [self tagForRow:indexPath.row];
+                    NSString *tag = self.tags[indexPath.row];
                     [segue.destinationViewController performSelector:@selector(setPhotos:)
                                                           withObject:self.photosByTag[tag]];
                     [segue.destinationViewController setTitle:[tag capitalizedString]];
@@ -79,7 +107,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.photosByTag count];
+    return [self.tags count];
 }
 
 - (NSString *)tagForRow:(NSUInteger)row
@@ -92,7 +120,7 @@
     static NSString *CellIdentifier = @"Tag Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    NSString *tag = [self tagForRow:indexPath.row];
+    NSString *tag = self.tags[indexPath.row];
     int photoCount = [self.photosByTag[tag] count];
     cell.textLabel.text = [tag capitalizedString];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%d photo%@", photoCount, photoCount > 1 ? @"s" : @""];
