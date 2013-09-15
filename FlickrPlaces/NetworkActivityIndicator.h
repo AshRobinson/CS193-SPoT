@@ -10,4 +10,7 @@
 
 @interface NetworkActivityIndicator : NSObject
 
++ (void)start;
++ (void)stop;
+
 @end
