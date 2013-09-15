@@ -12,6 +12,8 @@
 		582E326D17D91A9C0038055B /* ExtendNSLogFunctionality.m in Sources */ = {isa = PBXBuildFile; fileRef = 582E326C17D91A9C0038055B /* ExtendNSLogFunctionality.m */; };
 		582E327017DC74A50038055B /* RecentFlickrPhotos.m in Sources */ = {isa = PBXBuildFile; fileRef = 582E326F17DC74A50038055B /* RecentFlickrPhotos.m */; };
 		582E327617DC7DC60038055B /* FlickrRecentsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 582E327517DC7DC60038055B /* FlickrRecentsTVC.m */; };
+		582E327C17E25F9E0038055B /* NetworkActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 582E327B17E25F9E0038055B /* NetworkActivityIndicator.m */; };
+		582E327F17E3459D0038055B /* FlickrCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 582E327E17E3459D0038055B /* FlickrCache.m */; };
 		58D3839617D3C40500AA25B8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58D3839517D3C40500AA25B8 /* UIKit.framework */; };
 		58D3839817D3C40500AA25B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58D3839717D3C40500AA25B8 /* Foundation.framework */; };
 		58D3839A17D3C40500AA25B8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58D3839917D3C40500AA25B8 /* CoreGraphics.framework */; };
@@ -39,6 +41,10 @@
 		582E326F17DC74A50038055B /* RecentFlickrPhotos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentFlickrPhotos.m; sourceTree = "<group>"; };
 		582E327417DC7DC60038055B /* FlickrRecentsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrRecentsTVC.h; sourceTree = "<group>"; };
 		582E327517DC7DC60038055B /* FlickrRecentsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrRecentsTVC.m; sourceTree = "<group>"; };
+		582E327A17E25F9E0038055B /* NetworkActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkActivityIndicator.h; sourceTree = "<group>"; };
+		582E327B17E25F9E0038055B /* NetworkActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkActivityIndicator.m; sourceTree = "<group>"; };
+		582E327D17E3459D0038055B /* FlickrCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrCache.h; sourceTree = "<group>"; };
+		582E327E17E3459D0038055B /* FlickrCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrCache.m; sourceTree = "<group>"; };
 		58D3839217D3C40500AA25B8 /* FlickrPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D3839517D3C40500AA25B8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		58D3839717D3C40500AA25B8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -130,6 +136,10 @@
 		58D3839C17D3C40500AA25B8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				582E327D17E3459D0038055B /* FlickrCache.h */,
+				582E327E17E3459D0038055B /* FlickrCache.m */,
+				582E327A17E25F9E0038055B /* NetworkActivityIndicator.h */,
+				582E327B17E25F9E0038055B /* NetworkActivityIndicator.m */,
 				582E326B17D91A9C0038055B /* ExtendNSLogFunctionality.h */,
 				582E326C17D91A9C0038055B /* ExtendNSLogFunctionality.m */,
 				58D383A417D3C40500AA25B8 /* FlickrAppDelegate.h */,
@@ -233,6 +243,8 @@
 				582E326D17D91A9C0038055B /* ExtendNSLogFunctionality.m in Sources */,
 				582E327017DC74A50038055B /* RecentFlickrPhotos.m in Sources */,
 				582E327617DC7DC60038055B /* FlickrRecentsTVC.m in Sources */,
+				582E327C17E25F9E0038055B /* NetworkActivityIndicator.m in Sources */,
+				582E327F17E3459D0038055B /* FlickrCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
